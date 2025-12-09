@@ -1,10 +1,12 @@
 import express, { Request, Response } from "express";
 import initDB from "./config/db";
 import { authRoutes } from "./modules/auth/auth.routes";
+import { vehicleRouter } from "./modules/vehicles/vehicles.route";
 const app = express()
 
 // body parser for json data 
 app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
 // initializing db
 initDB()
@@ -15,8 +17,11 @@ app.get('/', (req:Request, res:Response) => {
 })
 
 // login and signup
-app.use('/api/v1/auth', authRoutes)
+app.use('/api/v1/auth', authRoutes);
 
+// vehicle route 
+
+app.use('/api/v1', vehicleRouter)
 
 // not found route 
 app.use((req:Request, res:Response) => {
