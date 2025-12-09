@@ -3,6 +3,7 @@ import { vehicleController } from "./vehicles.controller";
 
 const router= Router()
 
-router.post('/vehicles', vehicleController.create_vehicle)
+router.post('/vehicles', vehicleController.createVehicle)
+router.get('/vehicles', vehicleController.getAllVehicles)
 
 export const vehicleRouter = router;
