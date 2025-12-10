@@ -32,7 +32,6 @@ app.use('/api/v1', userRouter);
 
 
 // booking route
-
 app.use('/api/v1', bookingRouter)
 
 // not found route 

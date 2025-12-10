@@ -63,6 +63,43 @@ const createBooking = async (payload: any) => {
   };
 };
 
+
+
+const getAllBookings = async () => {
+  const query = `
+    SELECT 
+      b.id,
+      b.customer_id,
+      b.vehicle_id,
+      b.rent_start_date,
+      b.rent_end_date,
+      b.total_price,
+      b.status,
+      json_build_object(
+        'name', u.name,
+        'email', u.email
+      ) AS customer,
+      json_build_object(
+        'vehicle_name', v.vehicle_name,
+        'registration_number', v.registration_number
+      ) AS vehicle
+    FROM bookings b
+    JOIN users u ON b.customer_id = u.id
+    JOIN vehicles v ON b.vehicle_id = v.id
+    ORDER BY b.id ASC
+  `;
+
+  const result = await pool.query(query);
+  return result.rows;
+};
+
+
+
+
+
+
+
 export const bookingService = {
   createBooking,
+  getAllBookings
 };
