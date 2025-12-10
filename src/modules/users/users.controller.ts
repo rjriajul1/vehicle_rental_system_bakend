@@ -58,11 +58,7 @@ const updateUser = async (req: Request, res: Response) => {
   try {
     const {userId} = req.params
     const loggedInUser:any = req.user;
-    console.log(loggedInUser); 
 
-    
-
-    // ===== ROLE + SELF VALIDATION ===== //
     if (loggedInUser.role !== "admin" && loggedInUser.id !== userId) {
       return res.status(403).json({
         success: false,
@@ -70,7 +66,7 @@ const updateUser = async (req: Request, res: Response) => {
       });
     }
 
-    // ===== EMPTY BODY CHECK ===== //
+
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).json({
         success: false,
@@ -78,7 +74,6 @@ const updateUser = async (req: Request, res: Response) => {
       });
     }
 
-    // ===== UPDATE CALL ===== //
     const result = await userService.updateUser(userId as string, req.body);
 
     if (!result) {

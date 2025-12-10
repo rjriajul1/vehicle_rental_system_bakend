@@ -44,9 +44,6 @@ const updateUser = async (id: string, payload: any) => {
 };
 
 
-
-
-
 export const userService = {
     getAllUsers,
     deleteUser,
