@@ -1,6 +1,8 @@
 
 import { pool } from "../../config/db"
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import config from "../../config";
 
 const signUpUser = async(payload: Record<string, unknown>) => {
     const {name, email, password:planPassword, phone, role} = payload;
@@ -29,6 +31,10 @@ const match = bcrypt.compare(password, user.password);
 if(!match){
     return false
 }
+
+// const token = jwt.sign({name: user.name, email:user.email, role: user.role}, config.jwt_secret_str as string,{expiresIn: "7d"});
+// console.log(token);
+// return {token, user}
 
 }
 
