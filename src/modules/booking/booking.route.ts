@@ -9,3 +9,4 @@ router.get('/bookings', auth('admin', 'customer'), bookingController.getAllBooki
 router.put('/bookings/:bookingId',auth('admin', 'customer'), bookingController.getAllBookings);
 
 export const bookingRouter = router;
+
